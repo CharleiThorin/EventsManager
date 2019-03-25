@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Events Manager{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+        {% if not known %}
+            <p>Pleased to meet you!</p>
+        {% else %}
+            <p>Happy to see you again!<br> Please select Items</p>
+        {% endif %}
+    </div>
+    <form method="POST" >
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="form-group-">
+                <div class="form-inline">
+                    {{ form.budget_amount.label(for="usr") }}
+                    {{ form.budget_amount(class="form-control",id="usr" ) }}
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.cat_one.label(class='customcheck') }}
+                {{ form.cat_one() }}
+            </div>
+            <div class="col-md-4">
+                {{ form.cat_two.label(class='customcheck') }}
+                {{ form.cat_two() }}
+            </div>
+        </div>
+        {{ form.submit(class='btn btn-info') }}
+    </form>
+
+{% endblock %}

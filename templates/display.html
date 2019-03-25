@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Events Manager{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+        {% if not known %}
+            <p>Pleased to meet you!</p>
+        {% else %}
+            <p>Happy to see you again!<br> Please select Items</p>
+        {% endif %}
+    </div>
+    <div class="container">
+  <h2>Best Distributors chosen in the Area</h2>
+  <h3>Your Budget is UGX. <span style="color: #bd180c;">{{ budget }}</span></h3>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th style="font-size: large">Distributor</th>
+        <th style="font-size: large">Item</th>
+        <th style="font-size: large">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+     {% for item, dist in items.items() %}
+      <tr>
+        <td style="color: #002b80">{{ dist }}</td>
+        <td style="color: #002b80">{{ item }}</td>
+        <td style="color: #000">{{ distributors[dist] }}</td>
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+   <h4><span style="color: #e25924">{{ msg }}</span></h4>
+</div> <br>
+
+<div class="container">
+  <h2>A List of all Distributors in the Area</h2>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+          {% for item in dealers_list %}
+        <th colspan="2" style="font-size: large">{{ item }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+           {% for item in dealers_list %}
+               <td style="color: #002b80"><strong>Distributor</strong></td>
+               <td style="color: #002b80"><strong>Price</strong></td>
+           {% endfor %}
+        </tr>
+     {% for dealer in dealers %}
+      <tr>
+        {% for value in dealer.values() %}
+            <td style="color: #002b80">{{ value['dist'] }}</td>
+            <td style="color: #000">{{ value['price']}}</td>
+        {% endfor %}
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
